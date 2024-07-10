@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function AddPerson() {
+  const navigate = useNavigate();
   const [people, setPeople] = useState([]);
-  const [check , setCheck] = useState(false);
+  const [editableRows, setEditableRows] = useState([]);
 
   useEffect(() => {
     const storedPeople = JSON.parse(localStorage.getItem("people") || "[]");
@@ -13,6 +15,10 @@ function AddPerson() {
     setPeople((prevPeople) => [
       ...prevPeople,
       { name: "", dob: "", aadhar: "", mobile: "", age: "" },
+    ]);
+    setEditableRows((prevEditableRows) => [
+      ...prevEditableRows,
+      people.length,
     ]);
   };
 
@@ -56,6 +62,9 @@ function AddPerson() {
     }
     localStorage.setItem("people", JSON.stringify(people));
     alert("Person saved successfully");
+    setEditableRows((prevEditableRows) =>
+      prevEditableRows.filter((row) => row !== index)
+    );
   };
 
   const deletePerson = (index) => {
@@ -64,6 +73,9 @@ function AddPerson() {
       localStorage.setItem("people", JSON.stringify(newPeople));
       return newPeople;
     });
+    setEditableRows((prevEditableRows) =>
+      prevEditableRows.filter((row) => row !== index)
+    );
   };
 
   return (
@@ -84,60 +96,72 @@ function AddPerson() {
             </thead>
             <tbody>
               {people.map((person, index) => (
-                <React.Fragment key={index}>
-                  <tr className="sm:table-row block">
-                    <td className="border border-gray-300 p-2 block sm:table-cell before:content-['Name:'] before:font-bold before:mr-2 sm:before:content-none">
-                      <input
-                        type="text"
-                        value={person.name}
-                        onChange={(e) => updatePerson(index, "name", e.target.value)}
-                        className="w-full px-2 py-1"
-                      />
-                    </td>
-                    <td className="border border-gray-300 p-2 block sm:table-cell before:content-['Date_of_Birth:'] before:font-bold before:mr-2 sm:before:content-none">
-                      <input
-                        type="date"
-                        value={person.dob}
-                        onChange={(e) => updatePerson(index, "dob", e.target.value)}
-                        className="w-full"
-                      />
-                    </td>
-                    <td className="border border-gray-300 p-2 block sm:table-cell before:content-['Aadhar_Number:'] before:font-bold before:mr-2 sm:before:content-none">
-                      <input
-                        type="text"
-                        value={person.aadhar}
-                        onChange={(e) => updatePerson(index, "aadhar", e.target.value)}
-                        className="w-full"
-                      />
-                    </td>
-                    <td className="border border-gray-300 p-2 block sm:table-cell before:content-['Mobile_Number:'] before:font-bold before:mr-2 sm:before:content-none">
-                      <input
-                        type="text"
-                        value={person.mobile}
-                        onChange={(e) => updatePerson(index, "mobile", e.target.value)}
-                        className="w-full"
-                      />
-                    </td>
-                    <td className="border border-gray-300 p-2 block sm:table-cell before:content-['Age:'] before:font-bold before:mr-2 sm:before:content-none">
-                      {person.age}
-                    </td>
-                    <td className="border border-gray-300 p-2 block sm:table-cell before:content-['Actions:'] before:font-bold before:mr-2 sm:before:content-none">
+                <tr key={index} className="sm:table-row block">
+                  <td className="border border-gray-300 p-2 block sm:table-cell before:content-['Name:'] before:font-bold before:mr-2 sm:before:content-none">
+                    <input
+                      type="text"
+                      value={person.name}
+                      onChange={(e) =>
+                        updatePerson(index, "name", e.target.value)
+                      }
+                      className="w-full px-2 py-1 border-none p-2 focus:outline-none"
+                      readOnly={!editableRows.includes(index)}
+                    />
+                  </td>
+                  <td className="border border-gray-300 p-2 block sm:table-cell before:content-['Date_of_Birth:'] before:font-bold before:mr-2 sm:before:content-none">
+                    <input
+                      type="date"
+                      value={person.dob}
+                      onChange={(e) =>
+                        updatePerson(index, "dob", e.target.value)
+                      }
+                      className="w-full border-none p-2 focus:outline-none"
+                      readOnly={!editableRows.includes(index)}
+                    />
+                  </td>
+                  <td className="border border-gray-300 p-2 block sm:table-cell before:content-['Aadhar_Number:'] before:font-bold before:mr-2 sm:before:content-none">
+                    <input
+                      type="text"
+                      value={person.aadhar}
+                      onChange={(e) =>
+                        updatePerson(index, "aadhar", e.target.value)
+                      }
+                      className="w-full border-none p-2 focus:outline-none"
+                      readOnly={!editableRows.includes(index)}
+                    />
+                  </td>
+                  <td className="border border-gray-300 p-2 block sm:table-cell before:content-['Mobile_Number:'] before:font-bold before:mr-2 sm:before:content-none">
+                    <input
+                      type="text"
+                      value={person.mobile}
+                      onChange={(e) =>
+                        updatePerson(index, "mobile", e.target.value)
+                      }
+                      className="w-full border-none p-2 focus:outline-none"
+                      readOnly={!editableRows.includes(index)}
+                    />
+                  </td>
+                  <td className="border border-gray-300 p-2 block sm:table-cell before:content-['Age:'] before:font-bold before:mr-2 sm:before:content-none">
+                    {person.age}
+                  </td>
+                  <td className="border border-gray-300 p-2 block sm:table-cell before:content-['Actions:'] before:font-bold before:mr-2 sm:before:content-none">
+                    {editableRows.includes(index) ? (
                       <button
                         onClick={() => savePerson(index)}
                         className="bg-green-500 text-white px-2 py-1 mr-2"
                       >
                         Save
                       </button>
+                    ) : (
                       <button
                         onClick={() => deletePerson(index)}
                         className="bg-red-500 text-white px-2 py-1"
                       >
                         Delete
                       </button>
-                    </td>
-                  </tr>
-                  <tr className="h-4 sm:hidden"></tr>
-                </React.Fragment>
+                    )}
+                  </td>
+                </tr>
               ))}
             </tbody>
           </table>
