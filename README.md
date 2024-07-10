@@ -13,11 +13,6 @@ This project is a simple directory app built using React.js where users can add 
 - React.js
 - Tailwind CSS
 
-## Getting Started
+## Screenshots
 
-To run this project locally, follow these steps:
-
-1. Clone this repository.
-
-```bash
-git clone <repository-url>
+![Directory App Screenshot](https://via.placeholder.com/800x400.png?text=Directory+App+Screenshot)
