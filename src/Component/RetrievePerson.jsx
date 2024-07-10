@@ -26,8 +26,8 @@ function RetrieveInfo() {
   };
 
   return (
-    <div>
-      <h2 className="text-2xl mb-4">Retrieve Information</h2>
+    <div className=' border border-black m-10'>
+      <h2 className="text-2xl mb-4 border border-black w-[300px]">Retrieve Information</h2>
       <form onSubmit={handleSubmit} className="mb-4 flex flex-col sm:flex-row items-center">
         <label htmlFor="search-aadhar" className="mr-2 mb-2 sm:mb-0">Aadhar Number:</label>
         <input
@@ -42,33 +42,33 @@ function RetrieveInfo() {
       </form>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       {person && (
-        <div className="overflow-x-auto w-full">
-          <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
+        <div className="overflow-x-auto w-[90%] mx-auto mb-20">
+          <div className="inline-block min-w-full shadow-md  overflow-hidden">
             <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-100 hidden sm:table-header-group">
+              <thead className="bg-blue-600 hidden sm:table-header-group">
                 <tr>
-                  <th className="border border-gray-300 p-2">Name</th>
-                  <th className="border border-gray-300 p-2">Date of Birth</th>
-                  <th className="border border-gray-300 p-2">Aadhar Number</th>
-                  <th className="border border-gray-300 p-2">Mobile Number</th>
-                  <th className="border border-gray-300 p-2">Age</th>
+                  <th className="border border-blue-400 p-2">Name</th>
+                  <th className="border border-blue-400 p-2">Date of Birth</th>
+                  <th className="border border-blue-400 p-2">Aadhar Number</th>
+                  <th className="border border-blue-400 p-2">Mobile Number</th>
+                  <th className="border border-blue-400 p-2">Age</th>
                 </tr>
               </thead>
               <tbody>
                 <tr className="sm:table-row block">
-                  <td className="border border-gray-300 p-2 block sm:table-cell before:content-['Name:'] before:font-bold before:mr-2 sm:before:content-none">
+                  <td className="border border-gray-300 text-center p-2 block sm:table-cell before:content-['Name:'] before:font-bold before:mr-2 sm:before:content-none">
                     {person.name}
                   </td>
-                  <td className="border border-gray-300 p-2 block sm:table-cell before:content-['Date_of_Birth:'] before:font-bold before:mr-2 sm:before:content-none">
+                  <td className="border border-gray-300 text-center p-2 block sm:table-cell before:content-['Date_of_Birth:'] before:font-bold before:mr-2 sm:before:content-none">
                     {person.dob}
                   </td>
-                  <td className="border border-gray-300 p-2 block sm:table-cell before:content-['Aadhar_Number:'] before:font-bold before:mr-2 sm:before:content-none">
+                  <td className="border border-gray-300 text-center p-2 block sm:table-cell before:content-['Aadhar_Number:'] before:font-bold before:mr-2 sm:before:content-none">
                     {person.aadhar}
                   </td>
-                  <td className="border border-gray-300 p-2 block sm:table-cell before:content-['Mobile_Number:'] before:font-bold before:mr-2 sm:before:content-none">
+                  <td className="border border-gray-300 text-center p-2 block sm:table-cell before:content-['Mobile_Number:'] before:font-bold before:mr-2 sm:before:content-none">
                     {person.mobile}
                   </td>
-                  <td className="border border-gray-300 p-2 block sm:table-cell before:content-['Age:'] before:font-bold before:mr-2 sm:before:content-none">
+                  <td className="border border-gray-300 text-center p-2 block sm:table-cell before:content-['Age:'] before:font-bold before:mr-2 sm:before:content-none">
                     {person.age}
                   </td>
                 </tr>

@@ -16,10 +16,7 @@ function AddPerson() {
       ...prevPeople,
       { name: "", dob: "", aadhar: "", mobile: "", age: "" },
     ]);
-    setEditableRows((prevEditableRows) => [
-      ...prevEditableRows,
-      people.length,
-    ]);
+    setEditableRows((prevEditableRows) => [...prevEditableRows, people.length]);
   };
 
   const updatePerson = (index, field, value) => {
@@ -79,19 +76,21 @@ function AddPerson() {
   };
 
   return (
-    <div>
-      <h2 className="text-2xl mb-4">Add New Person</h2>
-      <div className="overflow-x-auto w-full">
-        <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
+    <div className=" border border-black w-[100%]  mx-auto relative">
+      <h2 className="text-2xl mb-4 border border-black w-[200px]">
+        Add New Person
+      </h2>
+      <div className="overflow-x-auto w-[90%] mx-auto mb-20">
+        <div className="inline-block min-w-full shadow-md  overflow-hidden">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-100 hidden sm:table-header-group">
-              <tr>
-                <th className="border border-gray-300 p-2">Name</th>
-                <th className="border border-gray-300 p-2">Date of Birth</th>
-                <th className="border border-gray-300 p-2">Aadhar Number</th>
-                <th className="border border-gray-300 p-2">Mobile Number</th>
-                <th className="border border-gray-300 p-2">Age</th>
-                <th className="border border-gray-300 p-2">Actions</th>
+              <tr className=" bg-blue-600 text-white font-sans">
+                <th className="border border-blue-400 p-2">Name</th>
+                <th className="border border-blue-400 p-2">Date of Birth</th>
+                <th className="border border-blue-400 p-2">Aadhar Number</th>
+                <th className="border border-blue-400 p-2">Mobile Number</th>
+                <th className="border border-blue-400 p-2">Age</th>
+                <th className="border border-blue-400 p-2">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -104,7 +103,7 @@ function AddPerson() {
                       onChange={(e) =>
                         updatePerson(index, "name", e.target.value)
                       }
-                      className="w-full px-2 py-1 border-none p-2 focus:outline-none"
+                      className="w-full px-2 py-1 border-none p-2 focus:outline-none text-center"
                       readOnly={!editableRows.includes(index)}
                     />
                   </td>
@@ -115,7 +114,7 @@ function AddPerson() {
                       onChange={(e) =>
                         updatePerson(index, "dob", e.target.value)
                       }
-                      className="w-full border-none p-2 focus:outline-none"
+                      className="w-full border-none p-2 focus:outline-none text-center"
                       readOnly={!editableRows.includes(index)}
                     />
                   </td>
@@ -126,7 +125,7 @@ function AddPerson() {
                       onChange={(e) =>
                         updatePerson(index, "aadhar", e.target.value)
                       }
-                      className="w-full border-none p-2 focus:outline-none"
+                      className="w-full border-none p-2 focus:outline-none text-center"
                       readOnly={!editableRows.includes(index)}
                     />
                   </td>
@@ -137,25 +136,25 @@ function AddPerson() {
                       onChange={(e) =>
                         updatePerson(index, "mobile", e.target.value)
                       }
-                      className="w-full border-none p-2 focus:outline-none"
+                      className="w-full border-none p-2 focus:outline-none text-center"
                       readOnly={!editableRows.includes(index)}
                     />
                   </td>
-                  <td className="border border-gray-300 p-2 block sm:table-cell before:content-['Age:'] before:font-bold before:mr-2 sm:before:content-none">
+                  <td className="border border-gray-300 p-2 block sm:table-cell before:content-['Age:'] before:font-bold before:mr-2 sm:before:content-none text-center">
                     {person.age}
                   </td>
                   <td className="border border-gray-300 p-2 block sm:table-cell before:content-['Actions:'] before:font-bold before:mr-2 sm:before:content-none">
                     {editableRows.includes(index) ? (
                       <button
                         onClick={() => savePerson(index)}
-                        className="bg-green-500 text-white px-2 py-1 mr-2"
+                        className=" text-blue-500 px-2 py-1 mr-2 text-center underline"
                       >
                         Save
                       </button>
                     ) : (
                       <button
                         onClick={() => deletePerson(index)}
-                        className="bg-red-500 text-white px-2 py-1"
+                        className=" text-blue-500 px-2 py-1 text-center underline"
                       >
                         Delete
                       </button>
@@ -169,9 +168,9 @@ function AddPerson() {
       </div>
       <button
         onClick={addRow}
-        className="mt-4 bg-blue-500 text-white px-4 py-2"
+        className="mt-4 bg-blue-500 w-[100px] text-white px-4 py-2 border border-black absolute  bottom-2 right-2"
       >
-        Add New Row
+        Add 
       </button>
     </div>
   );
