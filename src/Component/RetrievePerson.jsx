@@ -17,7 +17,7 @@ function RetrieveInfo() {
 
     const people = JSON.parse(localStorage.getItem('people') || '[]');
     const foundPerson = people.find(p => p.aadhar === aadhar);
-    
+
     if (foundPerson) {
       setPerson(foundPerson);
     } else {
@@ -26,7 +26,7 @@ function RetrieveInfo() {
   };
 
   return (
-    <div className=' border border-black m-10'>
+    <div className="border border-black m-10">
       <h2 className="text-2xl mb-4 border border-black w-[300px]">Retrieve Information</h2>
       <form onSubmit={handleSubmit} className="mb-4 flex flex-col sm:flex-row items-center">
         <label htmlFor="search-aadhar" className="mr-2 mb-2 sm:mb-0">Aadhar Number:</label>
@@ -41,9 +41,9 @@ function RetrieveInfo() {
         <button type="submit" className="bg-blue-500 text-white px-4 py-1 w-full sm:w-auto">Search</button>
       </form>
       {error && <p className="text-red-500 mb-4">{error}</p>}
-      {person && (
+      {person ? (
         <div className="overflow-x-auto w-[90%] mx-auto mb-20">
-          <div className="inline-block min-w-full shadow-md  overflow-hidden">
+          <div className="inline-block min-w-full shadow-md overflow-hidden">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-blue-600 hidden sm:table-header-group">
                 <tr>
@@ -76,6 +76,8 @@ function RetrieveInfo() {
             </table>
           </div>
         </div>
+      ) : (
+        aadhar.length === 12 && <h1 className="text-center mt-4">No match found</h1>
       )}
     </div>
   );
